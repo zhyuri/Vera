@@ -4,7 +4,6 @@ _a Powerful Wechat Public Account support framework with high extendibility_
 
     the lastest version is v2.0
 
-----
 
 ##Abstract
 
@@ -16,7 +15,6 @@ It has some features like this
 + It can serve many accounts at the same time.
 + It's very easy to develop plugin.
 
-----
 
 ##Install
 
@@ -58,7 +56,6 @@ try to develop your own plugin for Vera !
 
 you can use my plugins as a example.
 
-----
 
 ##Author Info
 
@@ -70,7 +67,6 @@ if you have any problem just mail to <zhang1437@gmail.com> I wiil reply in two d
 
 I'm looking for internship and part-time jobs now. Just mail me please. : )
 
-----
 
 ##What's next ?
 
