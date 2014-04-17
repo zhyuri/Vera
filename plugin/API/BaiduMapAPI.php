@@ -20,7 +20,6 @@
 class BaiduMapAPI
 {
     private $ServerName;
-    private $saeFetch;
 
     private $routeApi = "http://api.map.baidu.com/direction/v1?";//导航api
     private $searchApi = "http://api.map.baidu.com/place/v2/search?";//查询地点api
@@ -29,9 +28,7 @@ class BaiduMapAPI
 	
 	function __construct()
 	{
-		$this->saeFetch = new SaeFetchurl();
         $this->ServerName = $GLOBALS['ServerName'];
-
 	}
 
 	/**
@@ -76,7 +73,6 @@ class BaiduMapAPI
 	*/
 	protected function getRoute($start,$end,$mode = 'dirving')
 	{
-		$this->saeFetch->setMethod('post');//设置发送方式
 
 		$query = $this->addAk($this->routeApi);
 		$query.= "&origin=".$start['latitude'].",".$start['longitude'];
@@ -93,7 +89,12 @@ class BaiduMapAPI
 		$query.= "&tactics=11";
 		$query.= "&coord_type=gcj02";//Google用的坐标体系
 
-		$json = $this->saeFetch->fetch($query);//发送并接收回复
+		$ch = curl_init($query);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		$json = curl_exec($ch);//发送并接收回复
+		curl_close($ch);
+
 		$result = json_decode($json,true);//json解码返回关联数组
 		if($result['status'] != 0)
 			return NULL;//获取失败
@@ -109,13 +110,16 @@ class BaiduMapAPI
 	*/
 	protected function getGeoInfo($loc)
 	{
-		$this->saeFetch->setMethod('post');//设置发送方式
-
 		$query = $this->addAk($this->geoApi);
 		$query.= "&location=".$loc['latitude'].",".$loc['longitude'];
 		$query.= "&output=json&pois=0";
 
-		$json = $this->saeFetch->fetch($query);//发送并接收回复
+		$ch = curl_init($query);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		$json = curl_exec($ch);//发送并接收回复
+		curl_close($ch);
+
 		$result = json_decode($json,true);//json解码返回关联数组
 		if($result['status'] != 0)
 			return NULL;//获取失败
@@ -135,7 +139,6 @@ class BaiduMapAPI
 	*/
 	protected function getInfoByGPS($x,$y,$radius,$keyword)
 	{
-		$this->saeFetch->setMethod('post');
 
 		$query = $this->addAk($searchApi);
 		$query.= "&query=". $keyword;//查询关键词
@@ -144,7 +147,13 @@ class BaiduMapAPI
 		$query.= "&output=json";
 		$query.= "&scope=2";//详细程度，设为2可以显示距离信息
 		$query.= "&page_size=5";//返回5条记录，便于显示
-		$json = $this->saeFetch->fetch($query);
+
+		$ch = curl_init($query);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		$json = curl_exec($ch);//发送并接收回复
+		curl_close($ch);
+
 		$result = json_decode($json,true);
 
 		if($result['status'] != 0)
@@ -161,13 +170,17 @@ class BaiduMapAPI
 	*/
 	protected function getInfoByIP($ip)
 	{
-		$this->saeFetch->setMethod('post');
 
 		$query = $this->addAk($locationIP);
 		$query.= "&ip=".$ip;
 		$query.= "&coor=bd09ll";
 
-		$json = $this->saeFetch->fetch($query);
+		$ch = curl_init($query);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		$json = curl_exec($ch);//发送并接收回复
+		curl_close($ch);
+
 		$result = json_decode($json,true);
 
 		if($result['status'] != 0)
