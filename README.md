@@ -19,7 +19,7 @@ It has some features like this
 
 developed by Yuri. You are warmly welcome to develop plugins for it.
 
-My blog : [代码仔的实验室](http://www.yurilab.com/blog/1) (Chinese)
+My blog : [代码仔的实验室](http://blog.yurilab.com) (Chinese)
 
 if you have any problem just mail to <zhang1437@gmail.com> I wiil reply as soon as I can.
 
