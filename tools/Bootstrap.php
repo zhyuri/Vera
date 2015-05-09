@@ -67,7 +67,9 @@ class  Vera_Bootstrap
 			exit();
 		}
 
-		set_exception_handler('Action_Error::run');//最高级的异常捕获，统一显示为每个app自定的错误
+		if (Vera_Autoload::isExists('Action_Error::run')) {
+			set_exception_handler('Action_Error::run');//最高级的异常捕获，统一显示为每个app自定的错误
+		}
 
 		self::$Log = new Vera_Log;
 		self::$Log->init();
