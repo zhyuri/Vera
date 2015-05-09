@@ -140,7 +140,7 @@ class  Vera_Log
 		}
 		$logDir = SERVER_ROOT . 'log/' . $GLOBALS['APP_NAME'];
 		if(!is_dir($logDir)){
-			mkdir($logDir);
+			mkdir($logDir, 0777, true);
 		}
 
 		$file = $logDir . "/" . strtolower($level) . ".log";
