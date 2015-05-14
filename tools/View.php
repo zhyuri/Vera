@@ -19,7 +19,7 @@ require_once(SMARTY_DIR . 'Smarty.class.php');
 class Vera_View extends Smarty
 {
 
-    function __construct($debug)
+    function __construct($debug = false)
     {
         parent::__construct();
 
